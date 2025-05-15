@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Посты</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .no_style {
+        text-decoration: none;
+        color: #2c3e50;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        border: 2px solid #2c3e50;
+        border-radius: 4px;
+    }
+</style>
+<body>
+<br>
+<br>
+<a href="/" class="no_style">На главную</a>
+
+<h1 align="center">Список постов</h1>
+
+
+{% for item in page_obj %}
+<div>
+<ul>
+    <li><b>ID поста:</b> {{ item.id }}</li>
+    <li><b>Название поста: </b> {{ item.title }}</li>
+    <li><b>Дата создания поста:</b> {{ item.created_at }}</li>
+    <li><small><b>Дата обновления поста:</b> {{ item.updated_at|default:"не обновлялся" }}</small></li>
+    <a href="{% url 'post_by_id' item.id %}">Подробнее</a>
+    <hr>
+</ul>
+</div>
+{% endfor %}
+
+<div align="center">
+    {% if page_obj.has_previous %}
+        <small><a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></small>
+    {% endif %}
+
+    <b><span>{{ page_obj.number }}</span></b>  <!-- Текущая страница без ссылки -->
+
+    {% if page_obj.has_next %}
+    <small><a href="?page={{ page_obj.next_page_number }}">Следующая</a></small>
+    {% endif %}
+</div>
+
+
+</body>
+</html>
