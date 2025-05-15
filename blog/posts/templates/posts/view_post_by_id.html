@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Пост {{ data.title|lower }}</title>
-</head>
-<style>
-        body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-    }
-</style>
-<body>
-
+{% extends 'base.html' %}
+{% block content %}
 <h1 align="center">{{ data.title }}</h1>
 <p><b>Пост номер:</b> {{ data.id }}</p>
 
@@ -27,7 +15,4 @@
 <hr>
 <p> <b>Текст поста:</b> {{ data.content }}</p>
 <hr>
-<b><a href="http://127.0.0.1:8000/posts/">К постам</a></b>
-
-</body>
-</html>
+{% endblock %}

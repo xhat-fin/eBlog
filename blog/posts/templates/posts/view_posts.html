@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Посты</title>
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-    }
+{% extends 'base.html' %}
 
-    .no_style {
-        text-decoration: none;
-        color: #2c3e50;
-        font-size: 18px;
-        font-weight: bold;
-        padding: 10px;
-        border: 2px solid #2c3e50;
-        border-radius: 4px;
-    }
-</style>
-<body>
-<br>
-<br>
-<a href="/" class="no_style">На главную</a>
-
+{% block content %}
 <h1 align="center">Список постов</h1>
 
 
@@ -36,7 +12,11 @@
     <li><b>Дата создания поста:</b> {{ item.created_at }}</li>
     <li><small><b>Дата обновления поста:</b> {{ item.updated_at|default:"не обновлялся" }}</small></li>
     <a href="{% url 'post_by_id' item.id %}">Подробнее</a>
-    <hr>
+
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
+
 </ul>
 </div>
 {% endfor %}
@@ -52,7 +32,4 @@
     <small><a href="?page={{ page_obj.next_page_number }}">Следующая</a></small>
     {% endif %}
 </div>
-
-
-</body>
-</html>
+{% endblock %}
